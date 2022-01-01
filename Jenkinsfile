@@ -3,13 +3,14 @@ pipeline {
     statges {
        stage ("Checkout from GIT") {
         steps {
-             sh 'git clone https://github.com/mrkundansingh/terraform_ec2.git'
-             sh 'git log'
+             //sh 'git clone https://github.com/mrkundansingh/terraform_ec2.git'
+              archiveArtifacts artifacts: 'git checkout https://github.com/mrkundansingh/terraform_ec2.git', followSymlinks: false
+              sh 'git log'
               }
        }
       stage ("Terraform init") {
         steps {
-                 sh 'terraform init' 
+              sh 'terraform init' 
               }
        }
       stage ("Terraform fmt") {
