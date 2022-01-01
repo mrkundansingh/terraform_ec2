@@ -1,13 +1,13 @@
 pipeline {
     agent any
     statges {
-      // stage ("Checkout from GIT") {
-        //steps {
+       stage ("Checkout from GIT") {
+         steps {
              //sh 'git clone https://github.com/mrkundansingh/terraform_ec2.git'
              // archiveArtifacts artifacts: 'git checkout https://github.com/mrkundansingh/terraform_ec2.git', followSymlinks: false
-              //sh 'git log'
-              //}
-       //}
+              git url: https://github.com/mrkundansingh/terraform_ec2.git, branch: 'main'
+		}
+       }
       stage ("Terraform init") {
         steps {
               sh 'terraform init' 
