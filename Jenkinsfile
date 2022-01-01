@@ -3,6 +3,7 @@ pipeline {
     statges {
        stage ("Checkout from GIT") {
         steps {
+             sh 'git clone https://github.com/mrkundansingh/terraform_ec2.git'
              sh 'git log'
               }
        }
