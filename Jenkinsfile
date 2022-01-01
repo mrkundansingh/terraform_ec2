@@ -2,10 +2,9 @@ pipeline {
     agent any
     statges {
        stage ("Checkout from GIT") {
-         steps {
-             //sh 'git clone https://github.com/mrkundansingh/terraform_ec2.git'
-             // archiveArtifacts artifacts: 'git checkout https://github.com/mrkundansingh/terraform_ec2.git', followSymlinks: false
-              git url: https://github.com/mrkundansingh/terraform_ec2.git, branch: 'main'
+         steps {        
+             checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [],
+             userRemoteConfigs: [[url: 'https://github.com/mrkundansingh/terraform_ec2.git']]])
 		}
        }
       stage ("Terraform init") {
@@ -25,8 +24,7 @@ pipeline {
      }
      stage ("Terraform plan") {
         steps {
-              sh 'terraform plan'
-            
+              sh 'terraform plan'      
         }
      }
      stage ("Terraform apply") {
