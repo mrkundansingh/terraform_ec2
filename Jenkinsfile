@@ -1,13 +1,13 @@
 pipeline {
     agent any
     statges {
-       stage ("Checkout from GIT") {
-        steps {
+      // stage ("Checkout from GIT") {
+        //steps {
              //sh 'git clone https://github.com/mrkundansingh/terraform_ec2.git'
-              archiveArtifacts artifacts: 'git checkout https://github.com/mrkundansingh/terraform_ec2.git', followSymlinks: false
-              sh 'git log'
-              }
-       }
+             // archiveArtifacts artifacts: 'git checkout https://github.com/mrkundansingh/terraform_ec2.git', followSymlinks: false
+              //sh 'git log'
+              //}
+       //}
       stage ("Terraform init") {
         steps {
               sh 'terraform init' 
@@ -31,7 +31,6 @@ pipeline {
      }
      stage ("Terraform apply") {
         steps {
-            //sh 'terraform -chdir="./v.14/test_env" apply -var-file="stage.tfvars" --auto-approve'
              sh 'terraform apply --auto-approve'
            
         }
