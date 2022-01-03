@@ -1,10 +1,16 @@
 pipeline {
     agent any
     statges {
+         stage('Clean Workspace') {
+            steps {
+                sh 'rm -rf *'
+            }
+        }
+
        stage ("Checkout from GIT") {
-         steps {        
-             checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [],
-             userRemoteConfigs: [[url: 'https://github.com/mrkundansingh/terraform_ec2.git']]])
+           steps{
+		checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], 
+       		userRemoteConfigs: [[credentialsId: 'a6da4c8b-3941-4289-8351-98ab69e62374', url: 'https://github.com/mrkundansingh/terraform_ec2.git']]])		
 		}
        }
       stage ("Terraform init") {
